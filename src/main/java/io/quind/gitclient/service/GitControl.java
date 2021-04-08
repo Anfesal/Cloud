@@ -21,7 +21,6 @@ public class GitControl {
     private String localPath;
     private String remotePath;
     private Repository localRepo;
-    private String type;
     private Git git;
     private CredentialsProvider cp;
     private String name = "felipe.salcedoro@gmail.com";
@@ -31,7 +30,7 @@ public class GitControl {
         this.localPath = localPath;
         this.remotePath = remotePath;
         this.localRepo = new FileRepository(localPath + "/.git");
-        if (type == "1"){
+        if (type.equals("1")){
             cp = new UsernamePasswordCredentialsProvider(this.name, this.password);
         }
         git = new Git(localRepo);
