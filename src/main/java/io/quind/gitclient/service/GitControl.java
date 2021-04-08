@@ -21,16 +21,19 @@ public class GitControl {
     private String localPath;
     private String remotePath;
     private Repository localRepo;
+    private String type;
     private Git git;
     private CredentialsProvider cp;
     private String name = "felipe.salcedoro@gmail.com";
-    private String password = "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";
+    private String password = "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";
 
-    public GitControl(String localPath, String remotePath) throws IOException {
+    public GitControl(String localPath, String remotePath, String type) throws IOException {
         this.localPath = localPath;
         this.remotePath = remotePath;
         this.localRepo = new FileRepository(localPath + "/.git");
-        cp = new UsernamePasswordCredentialsProvider(this.name, this.password);
+        if (type == "1"){
+            cp = new UsernamePasswordCredentialsProvider(this.name, this.password);
+        }
         git = new Git(localRepo);
     }
 
