@@ -1,4 +1,4 @@
-package io.quind.GitClient;
+package io.quind.Gitclient;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package io.quind.GitClient.service;
+package io.quind.Gitclient.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,18 +6,9 @@ import java.util.Iterator;
 import org.eclipse.jgit.api.AddCommand;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.PushCommand;
-import org.eclipse.jgit.api.errors.CanceledException;
-import org.eclipse.jgit.api.errors.ConcurrentRefUpdateException;
-import org.eclipse.jgit.api.errors.DetachedHeadException;
 import org.eclipse.jgit.api.errors.GitAPIException;
-import org.eclipse.jgit.api.errors.InvalidConfigurationException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
-import org.eclipse.jgit.api.errors.NoFilepatternException;
-import org.eclipse.jgit.api.errors.NoHeadException;
-import org.eclipse.jgit.api.errors.NoMessageException;
-import org.eclipse.jgit.api.errors.RefNotFoundException;
-import org.eclipse.jgit.api.errors.WrongRepositoryStateException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.transport.CredentialsProvider;
@@ -42,7 +33,7 @@ public class GitControl {
         git = new Git(localRepo);
     }
 
-    public void cloneRepo() throws IOException, NoFilepatternException, GitAPIException {
+    public void cloneRepo() throws  GitAPIException {
         Git.cloneRepository()
                 .setURI(remotePath)
                 .setCredentialsProvider(cp)
@@ -50,18 +41,16 @@ public class GitControl {
                 .call();
     }
 
-    public void addToRepo() throws IOException, NoFilepatternException, GitAPIException {
+    public void addToRepo() throws  GitAPIException {
         AddCommand add = git.add();
         add.addFilepattern(".").call();
     }
 
-    public void commitToRepo(String message) throws IOException, NoHeadException,
-            NoMessageException, ConcurrentRefUpdateException,
-            JGitInternalException, WrongRepositoryStateException, GitAPIException {
+    public void commitToRepo(String message) throws JGitInternalException,  GitAPIException {
              git.commit().setMessage(message).call();
     }
 
-    public void pushToRepo() throws IOException, JGitInternalException,
+    public void pushToRepo() throws  JGitInternalException,
             InvalidRemoteException, GitAPIException {
         PushCommand pc = git.push();
         pc.setCredentialsProvider(cp)
@@ -77,10 +66,7 @@ public class GitControl {
         }
     }
 
-    public void pullFromRepo() throws IOException, WrongRepositoryStateException,
-            InvalidConfigurationException, DetachedHeadException,
-            InvalidRemoteException, CanceledException, RefNotFoundException,
-            NoHeadException, GitAPIException {
+    public void pullFromRepo() throws GitAPIException {
 
         git.pull().call();
     }
