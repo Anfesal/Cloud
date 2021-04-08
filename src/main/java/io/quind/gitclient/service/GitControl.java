@@ -18,7 +18,8 @@ import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 
 public class GitControl {
 
-    private String localPath, remotePath;
+    private String localPath;
+    private String remotePath;
     private Repository localRepo;
     private Git git;
     private CredentialsProvider cp;
@@ -50,8 +51,7 @@ public class GitControl {
              git.commit().setMessage(message).call();
     }
 
-    public void pushToRepo() throws  JGitInternalException,
-            InvalidRemoteException, GitAPIException {
+    public void pushToRepo() throws  JGitInternalException, GitAPIException {
         PushCommand pc = git.push();
         pc.setCredentialsProvider(cp)
                 .setForce(true)

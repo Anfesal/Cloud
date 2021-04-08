@@ -7,9 +7,9 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 public class Test {
 
     public static void main(String[] args) throws IOException, GitAPIException {
-        String localPath = "/home/andres/Documents/clonehere/Test2";
-        String remotePath = "https://github.com/Anfesal/Lab2_Bootstrap.git";
-        GitControl gc = new GitControl(localPath, remotePath);
+        //String localPath = "/home/andres/Documents/clonehere/Test2";
+        //String remotePath = "https://github.com/Anfesal/Lab2_Bootstrap.git";
+        GitControl gc = new GitControl("/home/andres/Documents/clonehere/Test2", "https://github.com/Anfesal/Lab2_Bootstrap.git");
         //Clone repository
         gc.cloneRepo();
         //Add files to repository
