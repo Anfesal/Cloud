@@ -58,7 +58,7 @@ public class GitControl {
     public void commitToRepo(String message) throws IOException, NoHeadException,
             NoMessageException, ConcurrentRefUpdateException,
             JGitInternalException, WrongRepositoryStateException, GitAPIException {
-        git.commit().setMessage(message).call();
+             git.commit().setMessage(message).call();
     }
 
     public void pushToRepo() throws IOException, JGitInternalException,
