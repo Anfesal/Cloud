@@ -1,4 +1,4 @@
-package io.quind.Gitclient.service;
+package io.quind.gitclient.service;
 
 import java.io.IOException;
 import org.eclipse.jgit.api.errors.GitAPIException;

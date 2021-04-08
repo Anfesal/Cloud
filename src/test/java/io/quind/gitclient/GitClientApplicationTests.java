@@ -1,4 +1,4 @@
-package io.quind.Gitclient;
+package io.quind.gitclient;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

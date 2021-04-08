@@ -1,4 +1,4 @@
-package io.quind.Gitclient.service;
+package io.quind.gitclient.service;
 
 import java.io.File;
 
