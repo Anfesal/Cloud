@@ -10,5 +10,6 @@ public class GitClone {
 
         GitControl gc = new GitControl("/home/andres/Documents/clonehere/refac", "https://github.com/eclipse/jgit.git", "0");
         gc.cloneRepo();
+
     }
 }
