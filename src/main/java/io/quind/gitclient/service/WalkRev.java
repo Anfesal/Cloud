@@ -16,6 +16,7 @@ public class WalkRev {
 
     public static void main(String[] args) throws IOException {
         try (Repository repository = CookbookHelper.openJGitCookbookRepository()) {
+
             Ref head = repository.exactRef("refs/heads/master");
 
             // a RevWalk allows to walk over commits based on some filtering that is defined
@@ -27,7 +28,7 @@ public class WalkRev {
                 walk.markStart(commit);
                 int count = 0;
                 for (RevCommit rev : walk) {
-                    System.out.println("Commit: " + rev.getAuthorIdent());
+                    System.out.println("Commit: " + rev.getAuthorIdent()  + ", name: " + rev.getFooterLines());
                     count++;
                 }
                 System.out.println(count);

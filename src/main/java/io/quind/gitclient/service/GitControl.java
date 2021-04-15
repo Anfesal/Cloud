@@ -49,8 +49,25 @@ public class GitControl {
                 .setCredentialsProvider(cp)
                 .setDirectory(new File(localPath))
                 .call();
+        Iterable<RevCommit> logs = git.log()
 
-
+                .call();
+        int count = 0;
+        for (RevCommit rev : logs) {
+            System.out.println("Commit: " + rev.getAuthorIdent() + ", name: " + rev.getFullMessage() + ", id: " + rev.getFooterLines());
+            count++;
+        }
+        System.out.println("Had " + count + " commits overall on current branch");
+        logs = git.log()
+                // for all log.all()
+                .addPath("README.md")
+                .call();
+        count = 0;
+        for (RevCommit rev : logs) {
+            System.out.println("Commit: " + rev.getAuthorIdent() + ", name: " + rev.getFullMessage() + ", id: " + rev.getId().getName() + ", encoding: " + rev.getEncodingName() + ", encoding: " + rev.getCommitterIdent());
+            count++;
+        }
+        System.out.println("Had " + count + " commits on README.md");
 
 
     }
