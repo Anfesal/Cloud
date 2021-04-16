@@ -2,6 +2,7 @@ package io.quind.gitclient.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -12,7 +13,11 @@ import org.eclipse.jgit.api.PushCommand;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
+import org.eclipse.jgit.blame.BlameResult;
+import org.eclipse.jgit.diff.RawText;
+import org.eclipse.jgit.diff.RawTextComparator;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
+import org.eclipse.jgit.lib.PersonIdent;
 import org.eclipse.jgit.lib.Ref;
 import org.eclipse.jgit.lib.Repository;
 import org.eclipse.jgit.revwalk.RevWalk;
@@ -73,8 +78,34 @@ public class GitControl {
     }
 
     public void addToRepo() throws  GitAPIException {
-        AddCommand add = git.add();
-        add.addFilepattern(".").call();
+
+            final String[] list = new File(".").list();
+            if (list == null) {
+                throw new IllegalStateException("Did not find any files at " + new File(".").getAbsolutePath());
+            }
+
+            final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("YYYY-MM-dd HH:mm");
+            for (String file : list) {
+                if (new File(file).isDirectory()) {
+                    continue;
+                }
+
+                System.out.println("Blaming " + file);
+                final BlameResult result = new Git(repository).blame().setFilePath(file)
+                        .setTextComparator(RawTextComparator.WS_IGNORE_ALL).call();
+                final RawText rawText = result.getResultContents();
+                for (int i = 0; i < rawText.size(); i++) {
+                    final PersonIdent sourceAuthor = result.getSourceAuthor(i);
+                    final RevCommit sourceCommit = result.getSourceCommit(i);
+                    System.out.println(sourceAuthor.getName() +
+                            (sourceCommit != null ? " - " + DATE_FORMAT.format(((long)sourceCommit.getCommitTime())*1000) +
+                                    " - " + sourceCommit.getName() : "") +
+                            ": " + rawText.getString(i));
+                }
+            }
+
+        //AddCommand add = git.add();
+        //add.addFilepattern(".").call();
     }
 
     public void commitToRepo(String message) throws JGitInternalException,  GitAPIException {

@@ -23,6 +23,7 @@ public class GitCloneGitHub {
 
         GitControl gc = new GitControl("/home/andres/Documents/clonehere/jueves", "https://github.com/Anfesal/Lab2_Bootstrap.git", "1");
         gc.cloneRepo();
+        //gc.addToRepo();
 
     }
 }
