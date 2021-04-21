@@ -17,6 +17,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.eclipse.jgit:org.eclipse.jgit:5.4.2.201908231537-r'
+	compile 'commons-io:commons-io:2.8.0'
 }
 
 sonarqube {
