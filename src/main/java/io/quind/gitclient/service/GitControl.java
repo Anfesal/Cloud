@@ -1,8 +1,10 @@
 package io.quind.gitclient.service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -14,18 +16,20 @@ import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.api.errors.InvalidRemoteException;
 import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.eclipse.jgit.blame.BlameResult;
+import org.eclipse.jgit.diff.DiffEntry;
+import org.eclipse.jgit.diff.DiffFormatter;
 import org.eclipse.jgit.diff.RawText;
 import org.eclipse.jgit.diff.RawTextComparator;
+import org.eclipse.jgit.errors.RevisionSyntaxException;
 import org.eclipse.jgit.internal.storage.file.FileRepository;
-import org.eclipse.jgit.lib.PersonIdent;
-import org.eclipse.jgit.lib.Ref;
-import org.eclipse.jgit.lib.Repository;
+import org.eclipse.jgit.lib.*;
 import org.eclipse.jgit.revwalk.RevWalk;
 import org.eclipse.jgit.transport.CredentialsProvider;
 import org.eclipse.jgit.transport.PushResult;
 import org.eclipse.jgit.transport.UsernamePasswordCredentialsProvider;
 import org.eclipse.jgit.revwalk.RevCommit;
 import org.eclipse.jgit.api.ListBranchCommand;
+import org.eclipse.jgit.treewalk.CanonicalTreeParser;
 
 
 public class GitControl {
@@ -49,11 +53,11 @@ public class GitControl {
     }
 
     public void cloneRepo() throws  IOException, GitAPIException {
-        Git.cloneRepository()
-                .setURI(remotePath)
-                .setCredentialsProvider(cp)
-                .setDirectory(new File(localPath))
-                .call();
+       // Git.cloneRepository()
+        //        .setURI(remotePath)
+          //      .setCredentialsProvider(cp)
+            //    .setDirectory(new File(localPath))
+              //  .call();
         Iterable<RevCommit> logs = git.log()
 
                 .call();
